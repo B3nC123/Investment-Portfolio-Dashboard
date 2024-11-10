@@ -1,0 +1,101 @@
+﻿Trade date,Settle date,Reference,Transaction Category,Direction,Description,Quantity,Unit cost (£),Purchase Value (£),Account
+15/09/2021,16/09/2021,CARD WEB,Deposit,In,Opening Subscription ,0, £-   ,4000,LISA
+16/09/2021,22/09/2021,B080710043,Purchase,N/A,Lindsell Train Global Equity Inclusive - Class A - Income (GBP) 259.054 @  386.019900,259.054, £3.86 ,-1000,LISA
+16/09/2021,22/09/2021,B080564573,Purchase,N/A,Legal & General Future World ESG Developed Index Class C - Accumulation (GBP) 1459.002 @  68.540000,1459.002, £0.69 ,-1000,LISA
+16/09/2021,22/09/2021,B080252433,Purchase,N/A,Rathbone Global Opportunities Class S - Accumulation (GBP) 523.97 @  190.850621,523.97, £1.91 ,-1000,LISA
+17/09/2021,21/09/2021,B081247293,Purchase,N/A,Vanguard Global Small-Cap Index Accumulation (GBP) 2.48 @  40239.04380,2.48, £402.39 ,-997.93,LISA
+02/10/2021,02/10/2021,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-0.78,LISA
+11/10/2021,13/10/2021,503292,Deposit,In,Transfer Subscription Yorkshire Building Society,0, £-   ,10166.15,ISA
+26/10/2021,26/10/2021,LISA,Gvrmt Bonus,In,Lifetime ISA Bonus ,0, £-   ,1000,LISA
+01/11/2021,04/11/2021,B116435423,Purchase,N/A,Baillie Gifford European Class B - Accumulation (GBP) 49.566 @  4035.024008,49.566, £40.35 ,-2000,ISA
+01/11/2021,05/11/2021,B116269373,Purchase,N/A,AXA Global Sustainable Distribution Class Z - Accumulation (GBP) 567.164 @  381.899900,567.164, £3.82 ,-2166,ISA
+01/11/2021,05/11/2021,B116130683,Purchase,N/A,Jupiter UK Mid Cap Class I- Accumulation (GBP) 537.793 @  371.890100,537.793, £3.72 ,-2000,ISA
+01/11/2021,04/11/2021,B116068893,Purchase,N/A,UBS US Growth Class C - Accumulation (GBP) 715.845 @  279.390000,715.845, £2.79 ,-2000,ISA
+01/11/2021,03/11/2021,B116547903,Purchase,N/A,IonQ Inc USD0.0001 A 85 @  1142.08,85, £11.42 ,-992.43,LISA
+02/11/2021,05/11/2021,B117420393,Purchase,N/A,Vanguard Japan Stock Index Accumulation (GBP) 7.17 @  27867.09530,7.17, £278.67 ,-1998.07,ISA
+03/11/2021,03/11/2021,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.53,LISA
+05/11/2021,05/11/2021,TRANSFER,Transfer,In,Product Transfer From HL Fund & Share Account,0, £-   ,712.81,ISA
+12/11/2021,16/11/2021,B128792513,Purchase,N/A,Rivian Automotive Inc USD0.001 A 7 @  9612.34,7, £96.12 ,-691.54,ISA
+03/12/2021,03/12/2021,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.98,ISA
+03/12/2021,03/12/2021,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-2.06,LISA
+13/12/2021,13/12/2021,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 11 21 Gross Loyalty,0, £-   ,0.12,ISA
+06/01/2022,06/01/2022,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-4.09,ISA
+06/01/2022,06/01/2022,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.96,LISA
+04/02/2022,04/02/2022,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.65,ISA
+24/02/2022,24/02/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 12 21 Gross Loyalty,0, £-   ,0.12,ISA
+03/03/2022,03/03/2022,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.16,ISA
+11/03/2022,11/03/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 01 22 Gross Loyalty,0, £-   ,0.11,ISA
+03/04/2022,03/04/2022,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.56,ISA
+05/04/2022,05/04/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 02 22 Gross Loyalty,0, £-   ,0.09,ISA
+05/05/2022,05/05/2022,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.23,ISA
+01/06/2022,01/06/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 04 22 Gross Loyalty,0, £-   ,0.09,ISA
+01/06/2022,01/06/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 03 22 Gross Loyalty,0, £-   ,0.1,ISA
+07/06/2022,07/06/2022,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-1.68,ISA
+07/06/2022,07/06/2022,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.21,LISA
+28/06/2022,28/06/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 05 22 Gross Loyalty,0, £-   ,0.09,ISA
+03/07/2022,03/07/2022,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.38,LISA
+21/07/2022,21/07/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 06 22 Gross Loyalty,0, £-   ,0.08,ISA
+09/11/2022,09/11/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 09 22 Gross Loyalty,0, £-   ,0.07,ISA
+09/11/2022,09/11/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 08 22 Gross Loyalty,0, £-   ,0.08,ISA
+09/11/2022,09/11/2022,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 07 22 Gross Loyalty,0, £-   ,0.09,ISA
+05/01/2023,05/01/2023,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-0.72,LISA
+08/02/2023,08/02/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 10 22 Gross Loyalty,0, £-   ,0.07,ISA
+01/03/2023,01/03/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 12 22 Gross Loyalty,0, £-   ,0.07,ISA
+01/03/2023,01/03/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 11 22 Gross Loyalty,0, £-   ,0.07,ISA
+06/06/2023,06/06/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 03 23 Gross Loyalty,0, £-   ,0.07,ISA
+03/07/2023,03/07/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 04 23 Gross Loyalty,0, £-   ,0.07,ISA
+11/07/2023,11/07/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 05 23 Gross Loyalty,0, £-   ,0.07,ISA
+11/07/2023,11/07/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 02 23 Gross Loyalty,0, £-   ,0.07,ISA
+12/07/2023,12/07/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 01 23 Gross Loyalty,0, £-   ,0.08,ISA
+18/07/2023,18/07/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 06 23 Gross Loyalty,0, £-   ,0.07,ISA
+19/09/2023,19/09/2023,LOYALTYU,Loyalty,In,Jupiter UK Mid Cap Class I- Accumulation (GBP) 08 23 Gross Loyalty,0, £-   ,0.07,ISA
+31/10/2023,02/11/2023,S637303783,Sale,N/A,Vanguard Japan Stock Index Accumulation (GBP) Fee Sale - .22 @  26950.41090,0.22, £269.50 ,59.29,ISA
+01/11/2023,02/11/2023,MANAGE FEE,Management Fee,Out,Payment of Outstanding Fees To A/C 01C0355389020,0, £-   ,-50.82,ISA
+03/11/2023,03/11/2023,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.03,ISA
+02/12/2023,02/12/2023,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.13,ISA
+09/12/2023,09/12/2023,INTEREST,Interest,In,Interest From 10/11/2023 TO 09/12/2023,0, £-   ,0.01,ISA
+23/12/2023,23/12/2023,URIBMFXWS9,Interest,In,Unit Rebate Re-Investment L&G Future World ESG Developed Inde,0, £-   ,10.3,LISA
+27/12/2023,03/01/2024,B674251793,Purchase,N/A,Legal & General Future World ESG Developed Index Class C - Accumulation (GBP) 13.434 @  76.670000,13.434, £0.77 ,-10.3,LISA
+04/01/2024,04/01/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-2.32,ISA
+07/02/2024,07/02/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/02/2024,14/02/2024,B703662593,Purchase,N/A,Vanguard Japan Stock Index Accumulation (GBP) .33 @  30166.40250,0.33, £301.66 ,-99.55,ISA
+09/02/2024,09/02/2024,INTEREST,Interest,In,Interest From 10/01/2024 TO 09/02/2024,0, £-   ,0.02,ISA
+13/02/2024,13/02/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-0.47,ISA
+07/03/2024,07/03/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/03/2024,09/03/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-7.39,ISA
+09/03/2024,09/03/2024,INTEREST,Interest,In,Interest From 10/02/2024 TO 09/03/2024,0, £-   ,0.02,ISA
+04/04/2024,04/04/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.69,ISA
+08/04/2024,08/04/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/04/2024,09/04/2024,INTEREST,Interest,In,Interest From 10/03/2024 TO 09/04/2024,0, £-   ,0.25,ISA
+24/04/2024,26/04/2024,B764713933,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .36 @  41427.97790,0.36, £414.28 ,-149.14,ISA
+03/05/2024,03/05/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.54,ISA
+07/05/2024,07/05/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/05/2024,09/05/2024,INTEREST,Interest,In,Interest From 10/04/2024 TO 09/05/2024,0, £-   ,0.28,ISA
+09/05/2024,13/05/2024,B773976593,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .23 @  42333.24810,0.23, £423.33 ,-97.37,ISA
+05/06/2024,05/06/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.76,ISA
+07/06/2024,07/06/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/06/2024,09/06/2024,INTEREST,Interest,In,Interest From 10/05/2024 TO 09/06/2024,0, £-   ,0.12,ISA
+11/06/2024,13/06/2024,B799572513,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .23 @  42720.58820,0.23, £427.21 ,-98.26,ISA
+03/07/2024,03/07/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.75,ISA
+08/07/2024,08/07/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/07/2024,09/07/2024,INTEREST,Interest,In,Interest From 10/06/2024 TO 09/07/2024,0, £-   ,0.11,ISA
+11/07/2024,15/07/2024,B825314193,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .22 @  43804.81890,0.22, £438.05 ,-96.37,ISA
+03/08/2024,03/08/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.91,ISA
+07/08/2024,07/08/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/08/2024,09/08/2024,INTEREST,Interest,In,Interest From 10/07/2024 TO 09/08/2024,0, £-   ,0.13,ISA
+13/08/2024,19/08/2024,B848023693,Purchase,N/A,Lindsell Train Global Equity Inclusive - Class A - Income (GBP) 3.023 @  382.090000,3.023, £3.82 ,-11.55,LISA
+13/08/2024,13/08/2024,DRIB644PG0,Income,In,Income Re-Investment Lindsell Train Global Equity,0, £-   ,11.55,LISA
+26/08/2024,28/08/2024,B854762773,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .23 @  43206.56560,0.23, £432.07 ,-99.38,ISA
+04/09/2024,04/09/2024,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.05,ISA
+04/09/2024,04/09/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.93,ISA
+09/09/2024,09/09/2024,INTEREST,Interest,In,Interest From 10/08/2024 TO 09/09/2024,0, £-   ,0.22,ISA
+09/09/2024,09/09/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+16/09/2024,18/09/2024,B870513943,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .23 @  43150.62500,0.23, £431.51 ,-99.25,ISA
+03/10/2024,03/10/2024,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.03,ISA
+03/10/2024,03/10/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-3.87,ISA
+07/10/2024,07/10/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
+09/10/2024,09/10/2024,INTEREST,Interest,In,Interest From 10/09/2024 TO 09/10/2024,0, £-   ,0.13,ISA
+09/10/2024,11/10/2024,B884104203,Purchase,N/A,Vanguard ESG Developed World All Cap Equity Accumulation (GBP) .22 @  44469.81900,0.22, £444.70 ,-97.83,ISA
+05/11/2024,05/11/2024,MANAGE FEE,Management Fee,Out,HL Lifetime ISA To A/C 01C0355389020,0, £-   ,-1.17,ISA
+05/11/2024,05/11/2024,MANAGE FEE,Management Fee,Out,HL Stocks & Shares ISA To A/C 01C0355389020,0, £-   ,-4.02,ISA
+07/11/2024,07/11/2024,REG. SAVER,Deposit,In,Transfer From Bank Account Bank A/C : ****9107,0, £-   ,100,ISA
