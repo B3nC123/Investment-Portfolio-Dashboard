@@ -1,8 +1,9 @@
-import { createContext, useContext, useReducer, ReactNode } from 'react';
-import { Portfolio, MarketPrice, Transaction } from '@/types';
-import { buildPortfolio } from '@/services/portfolioService';
+import { createContext, useReducer, ReactNode, useEffect } from 'react';
+import { Portfolio, MarketPrice, Transaction } from '../types';
+import { buildPortfolio } from '../services/portfolioService';
+import { loadDevelopmentData } from '../services/developmentData';
 
-interface PortfolioState {
+export interface PortfolioState {
   portfolio: Portfolio | null;
   marketPrices: MarketPrice[];
   transactions: Transaction[];
@@ -10,7 +11,7 @@ interface PortfolioState {
   error: string | null;
 }
 
-type PortfolioAction =
+export type PortfolioAction =
   | { type: 'SET_MARKET_PRICES'; payload: MarketPrice[] }
   | { type: 'SET_TRANSACTIONS'; payload: Transaction[] }
   | { type: 'BUILD_PORTFOLIO' }
@@ -22,20 +23,17 @@ const initialState: PortfolioState = {
   portfolio: null,
   marketPrices: [],
   transactions: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
-const portfolioReducer = (state: PortfolioState, action: PortfolioAction): PortfolioState => {
-  console.log('Portfolio Reducer:', { type: action.type, state, action });
-
+function portfolioReducer(state: PortfolioState, action: PortfolioAction): PortfolioState {
   switch (action.type) {
     case 'SET_MARKET_PRICES':
       console.log('Setting market prices:', action.payload.length);
       return {
         ...state,
         marketPrices: action.payload,
-        isLoading: false,
       };
 
     case 'SET_TRANSACTIONS':
@@ -43,7 +41,6 @@ const portfolioReducer = (state: PortfolioState, action: PortfolioAction): Portf
       return {
         ...state,
         transactions: action.payload,
-        isLoading: false,
       };
 
     case 'BUILD_PORTFOLIO':
@@ -57,6 +54,7 @@ const portfolioReducer = (state: PortfolioState, action: PortfolioAction): Portf
         return {
           ...state,
           error: 'Please upload both market prices and transactions data to build portfolio.',
+          isLoading: false,
         };
       }
 
@@ -72,12 +70,14 @@ const portfolioReducer = (state: PortfolioState, action: PortfolioAction): Portf
           ...state,
           portfolio,
           error: null,
+          isLoading: false,
         };
       } catch (error) {
         console.error('Error building portfolio:', error);
         return {
           ...state,
           error: 'Error building portfolio. Please check your data and try again.',
+          isLoading: false,
         };
       }
 
@@ -85,6 +85,7 @@ const portfolioReducer = (state: PortfolioState, action: PortfolioAction): Portf
       return {
         ...state,
         isLoading: action.payload,
+        error: action.payload ? null : state.error, // Clear error only when starting to load
       };
 
     case 'SET_ERROR':
@@ -104,27 +105,45 @@ const portfolioReducer = (state: PortfolioState, action: PortfolioAction): Portf
     default:
       return state;
   }
-};
+}
 
-const PortfolioContext = createContext<{
+export type PortfolioContextType = {
   state: PortfolioState;
   dispatch: React.Dispatch<PortfolioAction>;
-} | null>(null);
+};
 
-export const PortfolioProvider = ({ children }: { children: ReactNode }) => {
+export const PortfolioContext = createContext<PortfolioContextType | null>(null);
+
+export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(portfolioReducer, initialState);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        dispatch({ type: 'SET_LOADING', payload: true });
+        console.log('Loading development data...');
+        
+        const { marketPrices, transactions } = await loadDevelopmentData();
+        console.log('Development data loaded:', { 
+          marketPrices: marketPrices.length, 
+          transactions: transactions.length 
+        });
+        
+        dispatch({ type: 'SET_MARKET_PRICES', payload: marketPrices });
+        dispatch({ type: 'SET_TRANSACTIONS', payload: transactions });
+        dispatch({ type: 'BUILD_PORTFOLIO' });
+      } catch (error) {
+        console.error('Error loading development data:', error);
+        dispatch({ type: 'SET_ERROR', payload: 'Error loading development data' });
+      }
+    };
+
+    loadData();
+  }, []);
 
   return (
     <PortfolioContext.Provider value={{ state, dispatch }}>
       {children}
     </PortfolioContext.Provider>
   );
-};
-
-export const usePortfolio = () => {
-  const context = useContext(PortfolioContext);
-  if (!context) {
-    throw new Error('usePortfolio must be used within a PortfolioProvider');
-  }
-  return context;
-};
+}

@@ -1,19 +1,24 @@
 import { ReactNode } from 'react';
-import { Outlet } from 'react-router-dom';
 import { Header } from '../Dashboard/Header';
 import { Sidebar } from '../Dashboard/Sidebar';
 import { Container } from '@radix-ui/themes';
 
-export const Layout = () => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-background">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        <Container size="4" className="p-6">
-          <Outlet />
-        </Container>
-      </main>
+        <main className="flex-1 overflow-y-auto">
+          <Container size="4" className="p-6">
+            {children}
+          </Container>
+        </main>
+      </div>
     </div>
   );
 };

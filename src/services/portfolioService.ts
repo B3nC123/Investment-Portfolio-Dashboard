@@ -1,198 +1,157 @@
-import {
-  Portfolio,
-  Transaction,
-  MarketPrice,
-  Account,
-  Holding,
-  PerformanceMetrics,
-  AssetAllocation,
-  GeographicExposure,
-  ManagementFeeAnalysis,
-  AccountType
-} from '@/types';
+import { Transaction, MarketPrice, Portfolio, Holding, Account, createDefaultPerformance } from '../types';
 
-export const calculatePortfolioValue = (
-  holdings: Holding[],
-  marketPrices: MarketPrice[]
-): number => {
-  console.log('Calculating portfolio value with:', {
-    holdings: holdings.length,
-    marketPrices: marketPrices.length
-  });
-  
-  const value = holdings.reduce((total, holding) => {
-    const currentPrice = marketPrices.find(price => price.code === holding.code)?.price || 0;
-    return total + (holding.quantity * currentPrice);
-  }, 0);
-
-  console.log('Portfolio value calculated:', value);
-  return value;
+const calculateHoldingValue = (holding: Holding, marketPrices: MarketPrice[]): number => {
+  const latestPrice = marketPrices.find(p => p.symbol === holding.symbol);
+  return latestPrice ? holding.quantity * latestPrice.price : 0;
 };
 
-export const calculateAccountValue = (
-  transactions: Transaction[],
-  marketPrices: MarketPrice[],
-  accountType: AccountType
-): number => {
-  console.log(`Calculating account value for ${accountType}`);
-  const accountTransactions = transactions.filter(t => t.account === accountType);
+const findMarketPrice = (transaction: Transaction, marketPrices: MarketPrice[]): MarketPrice | undefined => {
+  // Only look for market prices for BUY and SELL transactions
+  if (!['BUY', 'SELL'].includes(transaction.type)) {
+    return undefined;
+  }
   
-  // Calculate holdings for the account
-  const holdings = calculateHoldings(accountTransactions, marketPrices);
-  
-  // Sum up the current value of all holdings
-  const balance = holdings.reduce((total, holding) => {
-    const currentPrice = marketPrices.find(price => price.code === holding.code)?.price || 0;
-    return total + (holding.quantity * currentPrice);
-  }, 0);
-
-  console.log(`Account ${accountType} value:`, balance);
-  return balance;
+  return marketPrices.find(p => p.symbol === transaction.symbol);
 };
 
-export const calculateHoldings = (
-  transactions: Transaction[],
-  marketPrices: MarketPrice[]
-): Holding[] => {
-  console.log('Calculating holdings from transactions:', {
-    transactions: transactions.length,
-    marketPrices: marketPrices.length
-  });
+export const buildPortfolio = (transactions: Transaction[], marketPrices: MarketPrice[]): Portfolio => {
+  const holdings: { [key: string]: Holding } = {};
+  const accounts: { [key: string]: Account } = {};
 
-  const holdingsMap = new Map<string, Holding>();
+  // Process transactions in chronological order
+  const sortedTransactions = [...transactions].sort((a, b) => a.date.getTime() - b.date.getTime());
 
-  transactions.forEach(transaction => {
-    if (transaction.type === 'BUY' || transaction.type === 'SELL') {
-      const currentPrice = marketPrices.find(price => 
-        transaction.description.includes(price.name)
-      );
-
-      if (!currentPrice) {
-        console.log('No matching market price found for transaction:', transaction.description);
-        return;
-      }
-
-      const code = currentPrice.code;
-      const existingHolding = holdingsMap.get(code) || {
-        code,
-        name: transaction.description,
-        quantity: 0,
-        currentPrice: currentPrice.price,
-        value: 0,
-        costBasis: 0,
-        performance: {
-          totalReturn: 0,
-          percentageReturn: 0,
-          timeWeightedReturn: 0
-        }
+  sortedTransactions.forEach(transaction => {
+    // Initialize account if it doesn't exist
+    if (!accounts[transaction.account]) {
+      accounts[transaction.account] = {
+        type: transaction.account,
+        balance: 0,
+        holdings: [],
+        transactions: [],
+        performance: createDefaultPerformance()
       };
+    }
 
-      if (transaction.type === 'BUY') {
-        existingHolding.quantity += transaction.quantity || 0;
-        existingHolding.costBasis += transaction.amount;
-      } else {
-        existingHolding.quantity -= transaction.quantity || 0;
-        existingHolding.costBasis -= transaction.amount;
-      }
+    // Add transaction to account
+    accounts[transaction.account].transactions.push(transaction);
 
-      existingHolding.value = existingHolding.quantity * currentPrice.price;
-      
-      if (existingHolding.costBasis !== 0) {
-        existingHolding.performance.totalReturn = existingHolding.value - existingHolding.costBasis;
-        existingHolding.performance.percentageReturn = 
-          (existingHolding.performance.totalReturn / Math.abs(existingHolding.costBasis)) * 100;
-      }
+    // Update account balance
+    accounts[transaction.account].balance += transaction.amount;
 
-      holdingsMap.set(code, existingHolding);
+    // Handle different transaction types
+    switch (transaction.type) {
+      case 'BUY':
+        if (!transaction.symbol) {
+          console.warn('Buy transaction missing symbol:', transaction);
+          break;
+        }
+        
+        const buyPrice = findMarketPrice(transaction, marketPrices);
+        if (!buyPrice) {
+          console.warn('No matching market price found for transaction:', transaction);
+        }
+
+        if (!holdings[transaction.symbol]) {
+          holdings[transaction.symbol] = {
+            symbol: transaction.symbol,
+            code: buyPrice?.code || transaction.symbol,
+            name: buyPrice?.name || transaction.description,
+            quantity: 0,
+            averageCost: 0,
+            totalCost: 0,
+            currentPrice: buyPrice?.price || 0,
+            value: 0,
+            costBasis: 0,
+            performance: createDefaultPerformance()
+          };
+        }
+
+        holdings[transaction.symbol].quantity += transaction.quantity || 0;
+        holdings[transaction.symbol].totalCost += Math.abs(transaction.amount);
+        holdings[transaction.symbol].averageCost = holdings[transaction.symbol].totalCost / holdings[transaction.symbol].quantity;
+        holdings[transaction.symbol].costBasis = holdings[transaction.symbol].totalCost;
+
+        // Update current price and value
+        if (buyPrice) {
+          holdings[transaction.symbol].currentPrice = buyPrice.price;
+          holdings[transaction.symbol].value = holdings[transaction.symbol].quantity * buyPrice.price;
+        }
+
+        // Add holding to account if not already present
+        if (!accounts[transaction.account].holdings.includes(transaction.symbol)) {
+          accounts[transaction.account].holdings.push(transaction.symbol);
+        }
+        break;
+
+      case 'SELL':
+        if (!transaction.symbol) {
+          console.warn('Sell transaction missing symbol:', transaction);
+          break;
+        }
+
+        const sellPrice = findMarketPrice(transaction, marketPrices);
+        if (!sellPrice) {
+          console.warn('No matching market price found for transaction:', transaction);
+        }
+
+        if (holdings[transaction.symbol]) {
+          holdings[transaction.symbol].quantity -= transaction.quantity || 0;
+          // Remove holding if quantity is 0 or negative
+          if (holdings[transaction.symbol].quantity <= 0) {
+            delete holdings[transaction.symbol];
+            accounts[transaction.account].holdings = accounts[transaction.account].holdings.filter(h => h !== transaction.symbol);
+          } else {
+            // Update current price and value
+            if (sellPrice) {
+              holdings[transaction.symbol].currentPrice = sellPrice.price;
+              holdings[transaction.symbol].value = holdings[transaction.symbol].quantity * sellPrice.price;
+            }
+          }
+        }
+        break;
+
+      case 'DIVIDEND':
+      case 'INTEREST':
+      case 'FEE':
+      case 'DEPOSIT':
+      case 'WITHDRAWAL':
+        // These transactions only affect account balance, which is already handled
+        break;
+
+      default:
+        console.warn('Unknown transaction type:', transaction.type);
     }
   });
 
-  const holdings = Array.from(holdingsMap.values()).filter(holding => holding.quantity > 0);
-  console.log('Calculated holdings:', holdings.length);
-  return holdings;
-};
+  // Calculate total portfolio value and performance
+  const holdingsArray = Object.values(holdings);
+  const totalValue = holdingsArray.reduce((total, holding) => {
+    return total + (holding.value || 0);
+  }, 0);
 
-export const calculatePerformanceMetrics = (
-  transactions: Transaction[],
-  marketPrices: MarketPrice[]
-): PerformanceMetrics => {
-  console.log('Calculating performance metrics');
-  const holdings = calculateHoldings(transactions, marketPrices);
-  const totalValue = calculatePortfolioValue(holdings, marketPrices);
-  const totalCost = holdings.reduce((sum, holding) => sum + holding.costBasis, 0);
-  
-  const totalReturn = totalValue - totalCost;
-  const percentageReturn = totalCost !== 0 ? (totalReturn / totalCost) * 100 : 0;
+  // Calculate portfolio performance
+  const initialValue = sortedTransactions
+    .filter(t => t.type === 'DEPOSIT')
+    .reduce((sum, t) => sum + t.amount, 0);
 
-  console.log('Performance metrics:', { totalReturn, percentageReturn });
+  const totalReturn = totalValue - initialValue;
+  const percentageReturn = initialValue > 0 ? (totalReturn / initialValue) * 100 : 0;
+
   return {
-    totalReturn,
-    percentageReturn,
-    timeWeightedReturn: 0, // TODO: Implement time-weighted return calculation
+    holdings: holdingsArray,
+    accounts: Object.values(accounts),
+    totalValue,
+    transactions: sortedTransactions,
+    lastUpdated: new Date(),
+    performance: {
+      day: 0, // TODO: Calculate daily performance
+      week: 0, // TODO: Calculate weekly performance
+      month: 0, // TODO: Calculate monthly performance
+      year: 0, // TODO: Calculate yearly performance
+      total: totalValue,
+      totalReturn,
+      percentageReturn
+    }
   };
-};
-
-export const calculateManagementFees = (
-  transactions: Transaction[],
-  period: 'monthly' | 'yearly' = 'yearly'
-): ManagementFeeAnalysis[] => {
-  const feeTransactions = transactions.filter(t => t.type === 'FEE');
-  const analysis: Record<string, number> = {};
-
-  feeTransactions.forEach(transaction => {
-    const date = transaction.date;
-    const key = period === 'monthly' 
-      ? `${date.getFullYear()}-${date.getMonth() + 1}`
-      : `${date.getFullYear()}`;
-    
-    analysis[key] = (analysis[key] || 0) + Math.abs(transaction.amount);
-  });
-
-  return Object.entries(analysis).map(([period, amount]) => ({
-    period,
-    amount,
-    percentage: 0, // TODO: Calculate as percentage of portfolio value
-  }));
-};
-
-export const buildPortfolio = (
-  transactions: Transaction[],
-  marketPrices: MarketPrice[]
-): Portfolio => {
-  console.log('Building portfolio with:', {
-    transactions: transactions.length,
-    marketPrices: marketPrices.length
-  });
-
-  const holdings = calculateHoldings(transactions, marketPrices);
-  const performance = calculatePerformanceMetrics(transactions, marketPrices);
-
-  const accounts: Account[] = ['ISA', 'LISA'].map(type => ({
-    type: type as AccountType,
-    balance: calculateAccountValue(transactions, marketPrices, type as AccountType),
-    transactions: transactions.filter(t => t.account === type),
-    holdings: holdings.filter(h => {
-      const holdingTransactions = transactions.filter(t => 
-        t.description.includes(h.name) && t.account === type
-      );
-      return holdingTransactions.length > 0;
-    })
-  }));
-
-  const portfolio = {
-    totalValue: calculatePortfolioValue(holdings, marketPrices),
-    accounts,
-    holdings,
-    transactions,
-    performance,
-  };
-
-  console.log('Portfolio built:', {
-    totalValue: portfolio.totalValue,
-    accounts: accounts.map(a => ({ type: a.type, balance: a.balance })),
-    holdings: holdings.length,
-    performance
-  });
-
-  return portfolio;
 };

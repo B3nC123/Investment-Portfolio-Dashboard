@@ -9,65 +9,101 @@ A React + TypeScript application for analyzing and visualizing investment portfo
 
 #### 1. Project Setup
 - ✅ Initialized React + TypeScript project using Vite
-- ✅ Set up Tailwind CSS and shadcn/ui for styling
+- ✅ Set up Tailwind CSS and Radix UI for styling
 - ✅ Configured project structure and TypeScript settings
 - ✅ Set up Git repository and linked to GitHub
-- ✅ Implemented development data loading system for testing
+- ✅ Implemented development data loading system with real CSV files
 
 #### 2. Core Components
 - ✅ Layout and Navigation
-  - Sidebar navigation
-  - Header component
-  - Responsive layout structure
+  - Sidebar navigation with active state indicators
+  - Header component with time period selection
+  - Responsive layout structure with proper styling
+  - Proper routing setup with React Router
 
 - ✅ File Management
   - CSV file upload interface
-  - File validation
+  - File validation and preview
   - Format requirements display
-  - Progress indicators
+  - Progress indicators and error handling
 
 - ✅ Portfolio Overview
   - Basic metrics display
   - Performance charts structure
   - Account breakdown view
+  - Real-time data updates
 
 #### 3. Data Processing
 - ✅ CSV Processing Services
-  - Market prices parser
-  - Transaction history parser
-  - Data validation
+  - Enhanced market prices parser with robust matching
+  - Comprehensive transaction history parser
+  - Improved data validation
+  - Better error handling
+  - Fund code mapping for accurate price matching
+  - Symbol extraction from transaction descriptions
 
 - ✅ Portfolio Calculations
-  - Total value calculation
-  - Holdings calculations
-  - Performance metrics
-  - Account-wise breakdown
+  - Accurate total value calculation
+  - Enhanced holdings calculations with proper transaction handling
+  - Improved performance metrics
+  - Account-wise breakdown with proper allocation
+  - Proper handling of transaction types and amounts
 
 #### 4. State Management
 - ✅ Portfolio Context
-  - Global state management
-  - Action handlers
-  - Portfolio building logic
+  - Separated context and hook logic
+  - Improved action handlers
+  - Better error handling
+  - Development data integration
+
+### Recent Improvements
+
+#### 1. Market Price Matching System
+- ✅ Implemented comprehensive fund code mapping
+- ✅ Added intelligent symbol extraction from descriptions
+- ✅ Fixed pence to pounds conversion
+- ✅ Improved market price lookup logic
+
+#### 2. Transaction Processing
+- ✅ Enhanced transaction type mapping
+  - Added support for Loyalty transactions
+  - Added support for Government Bonus
+  - Added support for Transfer transactions
+  - Proper handling of Income transactions
+- ✅ Improved amount sign handling
+  - Proper negation for fees and sells
+  - Proper positive values for deposits and dividends
+- ✅ Better transaction categorization
+
+#### 3. UI/UX Enhancements
+- ✅ Fixed Transaction History filters
+  - Resolved Select.Item empty value issues
+  - Improved filter logic
+  - Added "ALL" options for type and account filters
+- ✅ Enhanced Analysis view
+  - Working Monthly Activity chart
+  - Proper Cumulative Deposits chart
+  - Correct transaction summaries
 
 ### In Progress Features
 
 #### 1. Data Visualization
 - 🔄 Portfolio performance charts
 - 🔄 Asset allocation visualization
-- 🔄 Transaction history table
+- ✅ Transaction history table with filtering
 
 #### 2. Analysis Features
 - 🔄 Holdings analysis view
 - 🔄 Transaction patterns
-- 🔄 Fee analysis
+- ✅ Fee analysis
 
 ## Next Steps
 
 ### Immediate Priorities
-1. Debug and test portfolio calculations with development data
-2. Complete Holdings Analysis view implementation
-3. Implement Transaction History view with filtering
-4. Add performance visualization charts
+1. Complete performance visualization charts
+2. Finish Holdings Analysis view implementation
+3. Add more transaction analysis features
+4. Implement dark mode support
 
 ### Future Enhancements
 1. Add more advanced analytics
@@ -77,8 +113,8 @@ A React + TypeScript application for analyzing and visualizing investment portfo
 
 2. Improve user experience
    - Add data export functionality
-   - Implement dark mode
    - Add more customization options
+   - Implement responsive design improvements
 
 3. Add testing
    - Unit tests for calculations
@@ -103,52 +139,52 @@ src/
 │   ├── portfolioService.ts
 │   └── developmentData.ts
 ├── context/
-│   └── PortfolioContext.tsx
+│   ├── PortfolioContext.tsx
+│   └── usePortfolio.ts
 └── types/
     └── index.ts
 ```
-
-## Current Issues
-1. Need to verify portfolio calculations with development data
-2. Holdings Analysis view needs completion
-3. Transaction History view needs implementation
-4. Performance charts need to be added
 
 ## Development Environment
 - Node.js environment
 - React + TypeScript
 - Vite for development and building
-- Tailwind CSS for styling
+- Tailwind CSS + Radix UI for styling
 - GitHub for version control
 
 ## Testing Data
-Development data is now loaded automatically in development mode, sourced from:
-- Market Prices: Example data in developmentData.ts
-- Transactions: Example data in developmentData.ts
-
-## Git Workflow
-1. Main branch contains stable code
-2. Development should be done in feature branches
-3. Pull requests should be used for code review
-4. Commit messages should be descriptive and follow conventional commits
+Development data is now loaded from actual CSV files in example-data:
+- Market Prices: example-data/market-prices.csv
+- Transactions: example-data/transactions.csv
+- Fallback to hardcoded data if file loading fails
 
 ## Dependencies
 - React + TypeScript
 - Vite
 - Tailwind CSS
-- shadcn/ui
+- Radix UI
 - React Router
 - date-fns
 - Papa Parse
-- Recharts (for charts)
+- Recharts
 
 ## Notes for Next Developer
-1. The development data system is in place - use this for testing
-2. Focus on completing the Holdings Analysis and Transaction History views
-3. Portfolio calculations need verification with real data
-4. Consider adding error boundaries and more comprehensive error handling
-5. The project uses TypeScript - ensure proper typing for all new code
-6. Follow the existing component structure and styling patterns
+1. The development data system now uses real CSV files from example-data directory
+2. Portfolio calculations have been improved and tested with real data
+3. UI components use Radix UI Theme - ensure proper theme provider setup
+4. Transaction type mapping has been enhanced - check csvService.ts for fundCodeMap
+5. Market price matching logic has been improved - see portfolioService.ts
+6. Component styling uses both Tailwind and Radix UI - check index.css for custom styles
+7. Transaction History filters use "ALL" value instead of empty strings
+8. Date formatting uses UK format (DD/MM/YYYY)
+9. Amounts are properly signed based on transaction type
+10. Charts in Analysis view use Recharts with proper formatting
+
+## Known Issues to Address
+1. React Router future flag warnings need to be addressed
+2. Some transactions still show "No matching market price" warnings
+3. Performance calculations could be improved
+4. Date range filters need better validation
 
 ## Contact
 Project Owner: [Your Contact Information]

@@ -1,4 +1,4 @@
-import { Flex, Button } from '@radix-ui/themes';
+import { Flex, Button, Box } from '@radix-ui/themes';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   BarChartIcon,
@@ -13,28 +13,40 @@ export const Sidebar = () => {
   const location = useLocation();
 
   const navItems = [
-    { icon: <BarChartIcon />, label: 'Portfolio Overview', path: '/' },
-    { icon: <LayersIcon />, label: 'Holdings Analysis', path: '/holdings' },
-    { icon: <ClockIcon />, label: 'Transaction History', path: '/transactions' },
-    { icon: <FileTextIcon />, label: 'File Management', path: '/files' },
-    { icon: <GearIcon />, label: 'Settings', path: '/settings' },
+    { icon: <BarChartIcon width={18} height={18} />, label: 'Portfolio Overview', path: '/' },
+    { icon: <LayersIcon width={18} height={18} />, label: 'Holdings Analysis', path: '/holdings' },
+    { icon: <ClockIcon width={18} height={18} />, label: 'Transaction History', path: '/transactions' },
+    { icon: <FileTextIcon width={18} height={18} />, label: 'File Management', path: '/files' },
   ];
 
   return (
-    <aside className="w-64 border-r border-gray-200 bg-white p-4">
-      <Flex direction="column" gap="2">
+    <Box className="w-64 border-r border-gray-200 bg-white">
+      <Flex direction="column" p="4" gap="2">
+        <Box mb="4">
+          <Flex align="center" justify="center" mb="4">
+            <BarChartIcon width={24} height={24} className="text-blue-600" />
+          </Flex>
+        </Box>
         {navItems.map((item) => (
           <Button
             key={item.path}
             variant={location.pathname === item.path ? 'solid' : 'ghost'}
-            className="justify-start"
             onClick={() => navigate(item.path)}
+            className={`
+              w-full justify-start px-3 py-2 
+              ${location.pathname === item.path 
+                ? 'bg-blue-50 text-blue-700' 
+                : 'text-gray-600 hover:bg-gray-50'
+              }
+            `}
           >
-            <span className="mr-2">{item.icon}</span>
-            {item.label}
+            <Flex align="center" gap="2">
+              {item.icon}
+              <span>{item.label}</span>
+            </Flex>
           </Button>
         ))}
       </Flex>
-    </aside>
+    </Box>
   );
 };

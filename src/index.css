@@ -2,26 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
 }
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-}
-
-body {
-  @apply bg-background text-foreground;
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
 /* Custom scrollbar styles */
@@ -34,17 +47,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  @apply bg-gray-300 rounded hover:bg-gray-400 transition-colors;
 }
 
 /* File Upload Styles */
 .upload-dropzone {
-  @apply transition-all duration-300 ease-in-out border-2 border-dashed;
+  @apply transition-all duration-300 ease-in-out border-2 border-dashed rounded-lg;
 }
 
 .upload-dropzone:hover {
@@ -57,21 +65,12 @@ body {
 
 /* Loading Spinner Animation */
 .loading-spinner {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  @apply animate-spin;
 }
 
 /* Fade In Animation */
 .animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out;
+  @apply animate-[fadeIn_0.3s_ease-in-out];
 }
 
 @keyframes fadeIn {
@@ -85,45 +84,7 @@ body {
   }
 }
 
-/* Scale Animation */
-.animate-scale {
-  animation: scale 0.2s ease-in-out;
-}
-
-@keyframes scale {
-  from {
-    transform: scale(0.95);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-/* Tab Styles */
-.rt-TabsTrigger {
-  @apply relative transition-all duration-200;
-}
-
-.rt-TabsTrigger[data-state='active'] {
-  @apply bg-primary/10 font-medium;
-}
-
-.rt-TabsTrigger[data-state='active']::after {
-  content: '';
-  @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary;
-  animation: slideIn 0.2s ease-in-out;
-}
-
-@keyframes slideIn {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* Table Styles */
+/* Preview Table Styles */
 .preview-table {
   @apply w-full border-collapse;
 }
@@ -144,73 +105,51 @@ body {
   @apply bg-gray-50;
 }
 
-/* Button Styles */
-.rt-Button {
+/* Navigation Button Styles */
+.nav-button {
+  @apply w-full text-left px-3 py-2 rounded-md transition-colors duration-200;
+}
+
+.nav-button:hover {
+  @apply bg-gray-50;
+}
+
+.nav-button.active {
+  @apply bg-blue-50 text-blue-700;
+}
+
+/* Card Hover Effects */
+.hover-card {
   @apply transition-all duration-200;
 }
 
-.rt-Button:hover {
-  @apply transform scale-[1.02];
-}
-
-.rt-Button:active {
-  @apply transform scale-[0.98];
-}
-
-/* Card Styles */
-.rt-Card {
-  @apply transition-all duration-200;
-}
-
-.rt-Card:hover {
-  @apply shadow-md;
+.hover-card:hover {
+  @apply shadow-md -translate-y-0.5;
 }
 
 /* Status Indicators */
 .status-indicator {
-  @apply flex items-center gap-2 px-2 py-1 rounded-full text-sm font-medium transition-all duration-200;
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
 }
 
-.status-indicator.success {
-  @apply bg-green-50 text-green-700;
+.status-success {
+  @apply bg-green-100 text-green-800;
 }
 
-.status-indicator.error {
-  @apply bg-red-50 text-red-700;
+.status-error {
+  @apply bg-red-100 text-red-800;
 }
 
-.status-indicator.loading {
-  @apply bg-blue-50 text-blue-700;
+.status-warning {
+  @apply bg-yellow-100 text-yellow-800;
 }
 
-/* Responsive Layout Adjustments */
-@media (max-width: 768px) {
-  .rt-Container {
-    @apply px-4;
-  }
-
-  .rt-Grid {
-    @apply grid-cols-1;
-  }
-}
-
-/* Transitions */
-.transition-smooth {
-  @apply transition-all duration-300 ease-in-out;
+/* Loading States */
+.loading-overlay {
+  @apply absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center;
 }
 
 /* Focus Styles */
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-}
-
-/* Interactive Elements */
-.interactive-hover {
-  @apply hover:bg-primary/10 active:bg-primary/20 transition-colors duration-200;
-}
-
-/* Loading Overlay */
-.loading-overlay {
-  @apply absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center;
-  animation: fadeIn 0.2s ease-in-out;
 }
